@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link href="src/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Satisfy&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://kit.fontawesome.com/617bfc2b44.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Weather Forecast</h1>
+      <form class="row g-3" id="search-form">
+        <div class="col-sm-9 formplace">
+          <input
+            type="search"
+            class="form-control"
+            id="city"
+            placeholder="City"
+          />
+        </div>
+        <div class="col-sm-2">
+          <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        </div>
+        <div class="col-sm-1 locator" id="locator"><i class="fa-solid fa-location-dot"></i></div>
+      </form>
+      <div class="row" 
+      style="background-image: url('https://content.r9cdn.net/rimg/dimg/27/bb/1e63bfbb-city-15139-1645cdfc948.jpg?crop=true&width=1020&height=498'); height: 140px; background-repeat: no-repeat; background-size: cover; background-position: top center;"
+      >
+       <h2 id="search_city">Kyiv</h2>
+        <p class="date" id="date">Sunday, 02/07/2022</p>
+        </div>
+      <div class="row">
+        <div class="col-sm-3 flex">
+          <img id="weatherIcon" class="partly-cloudy">
+        </div>
+          <div class="col-sm-4">
+            <div class="current-degree" id="currentDegree"><span id="plusMinus"></span><span class="current_degree_val"></span>
+              <a href="#" class="celcius">&#8451;</a>/<a href class="fahrenheit">&#x2109;</a></div> 
+        </div>
+        <div class="col-sm-5">
+          <ul class="current-weather">
+            <li >Humidity 🌫 <b id="humidity">__</b>%</li>
+            <li>Wind 💨 <b id="wind">__</b> m/s</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-weather">
+      <div class="row g-2">
+        <div class="col-sm">
+          <ul>
+            <li>Mon</li>
+            <li class="emoji">☀️</li>
+            <li><b>+30 &#8451;</b></li>
+          </ul>
+        </div>
+        <div class="col-sm">
+        <ul>
+            <li>Tue</li>
+            <li class="emoji">⛅️</li>
+            <li><b>+28 &#8451;</b></li>
+        </ul>
+        </div><div class="col-sm">
+        <ul>
+            <li>Wed</li>
+            <li class="emoji">☁️</li>
+            <li><b>+26 &#8451;</b></li>
+        </ul>
+        </div><div class="col-sm">
+        <ul>
+            <li>Thur</li>
+            <li class="emoji">🌦</li>
+            <li><b>+22 &#8451;</b></li>
+        </ul>
+        </div><div class="col-sm">
+        <ul>
+            <li>Fri</li>
+            <li class="emoji">🌧</li>
+            <li><b>+21 &#8451;</b></li>
+        </ul>
+        </div><div class="col-sm">
+        <ul>
+            <li>Sat</li>
+            <li class="emoji">🌥</li>
+            <li><b>+25 &#8451;</b></li>
+        </ul>
+        </div>
+    </div>
+        </div>
+      </div>
+    </div>
+    <script src="src/script.js"></script>
+  </body>
+</html>
