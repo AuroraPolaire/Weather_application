@@ -120,7 +120,7 @@ function getPosition(response) {
   console.log(response);
   let lat = response.coords.latitude;
   let long = response.coords.longitude;
-  let urlPosition = `${apiDomain}/data/2.5/weather?lat=${lat}&lon=${long}exclude=daily&appid=e6e615483aef9a888d1410f9f980d509&units=metric`;
+  let urlPosition = `${apiDomain}/data/2.5/weather?lat=${lat}&lon=${long}&appid=e6e615483aef9a888d1410f9f980d509&units=metric`;
   axios.get(urlPosition).then(showWeather);
 }
 
