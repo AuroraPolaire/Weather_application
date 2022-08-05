@@ -1,7 +1,7 @@
 let now = new Date();
 const cityPlace = document.querySelector("#search_city");
 const apiDomain = "https://api.openweathermap.org";
-const api = "baa17103f06129d63a6c32b2406b94ba";
+const api = "05872d6d96180a5ad27603c03bb9c9a8";
 const days = [
   "Sunday",
   "Monday",
@@ -120,8 +120,7 @@ function getPosition(response) {
   console.log(response);
   let lat = response.coords.latitude;
   let long = response.coords.longitude;
-  let urlPosition = `${apiDomain}/data/2.5/weather?lat=${lat}&lon=${long}&appid=baa17103f06129d63a6c32b2406b94ba&units=metric`;
-
+  let urlPosition = `${apiDomain}/data/2.5/weather?lat=${lat}&lon=${long}exclude=daily&appid=05872d6d96180a5ad27603c03bb9c9a8&units=metric`;
   axios.get(urlPosition).then(showWeather);
 }
 
@@ -131,6 +130,8 @@ function getCurrentLocation(event) {
 }
 let locatorButton = document.querySelector("#locator");
 locatorButton.addEventListener("click", getCurrentLocation);
+
+const urlForecast = "";
 
 window.addEventListener("load", (event) => {
   navigator.geolocation.getCurrentPosition(getPosition);
