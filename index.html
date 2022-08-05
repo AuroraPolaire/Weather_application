@@ -35,22 +35,20 @@
         </div>
         <div class="col-sm-1 locator" id="locator"><i class="fa-solid fa-location-dot"></i></div>
       </form>
-      <div class="row" 
-      style="background-image: url('https://content.r9cdn.net/rimg/dimg/27/bb/1e63bfbb-city-15139-1645cdfc948.jpg?crop=true&width=1020&height=498'); height: 140px; background-repeat: no-repeat; background-size: cover; background-position: top center;"
-      >
+      <div class="row" id="background">
        <h2 id="search_city">Kyiv</h2>
         <p class="date" id="date">Sunday, 02/07/2022</p>
         </div>
       <div class="row">
-        <div class="col-sm-3 flex">
-          <img id="weatherIcon" class="partly-cloudy">
-        <div id="weatherDescription"></div>
+        <div class="col-sm-3" class="icon_and_description">
+          <div><img id="weatherIcon" class="partly-cloudy"></div>
+        <div id="weatherDescription" class="weather_description"></div>
         </div>
-          <div class="col-sm-4">
+          <div class="col-sm-5">
             <div class="current-degree" id="currentDegree"><span id="plusMinus"></span><span class="current_degree_val"></span>
               <a href="#" class="celcius">&#8451;</a>/<a href class="fahrenheit">&#x2109;</a></div> 
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-4">
           <ul class="current-weather">
             <li >Humidity 🌫 <b id="humidity">__</b>%</li>
             <li>Wind 💨 <b id="wind">__</b> m/s</li>
@@ -105,3 +103,5 @@
     <script src="src/script.js"></script>
   </body>
 </html>
+
+

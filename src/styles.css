@@ -76,12 +76,18 @@ a.fahrenheit {
   justify-content: center;
 }
 .partly-cloudy {
-  font-size: 70px;
   padding: 0;
   margin-top: 0;
-  display: block;
+  height: 55px;
   text-align: center;
-  height: 100px;
+}
+.col-sm-3 {
+  text-align: center;
+}
+.weather_description {
+  text-align: center;
+  font-size: 18px;
+  text-transform: capitalize;
 }
 .week-weather {
   margin-top: 50px;

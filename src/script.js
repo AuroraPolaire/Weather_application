@@ -91,6 +91,8 @@ function showWeather(response) {
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
+  document.querySelector("#weatherDescription").innerHTML =
+    response.data.weather[0].description;
 
   showIcon(response.data.weather[0].icon);
 }
@@ -128,7 +130,7 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(getPosition);
 }
-let locatorButton = document.querySelector("#locator");
+const locatorButton = document.querySelector("#locator");
 locatorButton.addEventListener("click", getCurrentLocation);
 
 const urlForecast = "";
