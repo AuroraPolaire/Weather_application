@@ -40,6 +40,16 @@ if (minutes < 10) {
 const date = document.querySelector("#date");
 date.innerHTML = `${day}, ${number}/${month},  ${hour}:${minutes}`;
 
+if (hour <= 18) {
+  document.getElementById("background").style.backgroundImage =
+    "url(https://i.pinimg.com/originals/32/81/09/3281093ab45ded7b7ad91ac591ed0854.jpg)";
+} else {
+  document.getElementById("background").style.backgroundImage =
+    "url(https://ak6.picdn.net/shutterstock/videos/21933226/thumb/1.jpg)";
+  document.getElementById("title").style.color = "#000000";
+  document.getElementById("search_city").style.color = "#000000";
+}
+
 function search($event) {
   $event.preventDefault();
   const search_city = document.querySelector("#search_city");
@@ -132,8 +142,6 @@ function getCurrentLocation(event) {
 }
 const locatorButton = document.querySelector("#locator");
 locatorButton.addEventListener("click", getCurrentLocation);
-
-const urlForecast = "";
 
 window.addEventListener("load", (event) => {
   navigator.geolocation.getCurrentPosition(getPosition);
