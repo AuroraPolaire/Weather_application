@@ -40,7 +40,7 @@ if (minutes < 10) {
 const date = document.querySelector("#date");
 date.innerHTML = `${day}, ${number}/${month},  ${hour}:${minutes}`;
 
-if (hour <= 18) {
+if (hour <= 18 && hour >= 7) {
   document.getElementById("background").style.backgroundImage =
     "url(https://i.pinimg.com/originals/32/81/09/3281093ab45ded7b7ad91ac591ed0854.jpg)";
 } else {
@@ -108,7 +108,6 @@ function showWeather(response) {
 }
 
 function searchCity(event) {
-  event.preventDefault();
   const input = document.querySelector("#city");
   const city = input.value;
   // const cityPlace = document.querySelector("#search_city");
@@ -142,6 +141,42 @@ function getCurrentLocation(event) {
 }
 const locatorButton = document.querySelector("#locator");
 locatorButton.addEventListener("click", getCurrentLocation);
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  forecastHTML =
+    forecastHTML +
+    `
+      <div class="col-sm">
+        <ul>
+          <li>Mon</li>
+          <li class="emoji">☀️</li>
+          <li>
+            <b>+30 &#8451;</b>
+          </li>
+        </ul>
+      </div>
+    
+    `;
+  forecastHTML =
+    forecastHTML +
+    `
+    <div class="col-sm">
+        <ul>
+          <li>Mon</li>
+          <li class="emoji">☀️</li>
+          <li>
+            <b>+30 &#8451;</b>
+          </li>
+        </ul>
+      </div>
+     `;
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
 
 window.addEventListener("load", (event) => {
   navigator.geolocation.getCurrentPosition(getPosition);
