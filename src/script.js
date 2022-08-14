@@ -145,26 +145,14 @@ locatorButton.addEventListener("click", getCurrentLocation);
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  forecastHTML =
-    forecastHTML +
-    `
+  let days = ["Mon", "Tue", "Wed", "Thur", "Fri"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
       <div class="col-sm">
         <ul>
-          <li>Mon</li>
-          <li class="emoji">☀️</li>
-          <li>
-            <b>+30 &#8451;</b>
-          </li>
-        </ul>
-      </div>
-    
-    `;
-  forecastHTML =
-    forecastHTML +
-    `
-    <div class="col-sm">
-        <ul>
-          <li>Mon</li>
+          <li>${day}</li>
           <li class="emoji">☀️</li>
           <li>
             <b>+30 &#8451;</b>
@@ -172,6 +160,7 @@ function displayForecast() {
         </ul>
       </div>
      `;
+  });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
