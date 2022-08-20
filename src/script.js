@@ -40,6 +40,14 @@ if (minutes < 10) {
 const date = document.querySelector("#date");
 date.innerHTML = `${day}, ${number}/${month},  ${hour}:${minutes}`;
 
+function formatDay(timestamp) {
+  let date = new Data(timestamp * 1000);
+  let day = day.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+
+  return day[day];
+}
+
 if (hour <= 18 && hour >= 7) {
   document.getElementById("background").style.backgroundImage =
     "url(https://i.pinimg.com/originals/32/81/09/3281093ab45ded7b7ad91ac591ed0854.jpg)";
@@ -142,20 +150,26 @@ function getCurrentLocation(event) {
 const locatorButton = document.querySelector("#locator");
 locatorButton.addEventListener("click", getCurrentLocation);
 
-function displayForecast() {
+function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
+
   let forecastHTML = `<div class="row">`;
-  let days = ["Mon", "Tue", "Wed", "Thur", "Fri"];
-  days.forEach(function (day) {
+
+  days.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `
       <div class="col-sm">
         <ul>
-          <li>${day}</li>
-          <li class="emoji">☀️</li>
+          <li>${formatDay(forecastDay.dt)}</li>
+          <li class="emoji">
+          <img src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png" alt="" width="42" />
+          </li>
           <li>
-            <b>+30 &#8451;</b>
+            <b>${forecastDay.temp.day} &#8451;</b>
           </li>
         </ul>
       </div>
@@ -166,6 +180,18 @@ function displayForecast() {
 }
 
 displayForecast();
+
+// PROBLEM PART
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "baa17103f06129d63a6c32b2406b94ba";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={part}&appid=baa17103f06129d63a6c32b2406b94ba&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+// PROBLEM PART
+
+getForecast(response.data.coord);
 
 window.addEventListener("load", (event) => {
   navigator.geolocation.getCurrentPosition(getPosition);
