@@ -43,7 +43,7 @@ date.innerHTML = `${day}, ${number}/${month},  ${hour}:${minutes}`;
 function formatDay(timestamp) {
   let date = new Data(timestamp * 1000);
   let day = day.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return day[day];
 }
@@ -156,7 +156,9 @@ function displayForecast(response) {
 
   let forecastHTML = `<div class="row">`;
 
-  days.forEach(function (forecastDay) {
+  days.forEach(function (forecastDay, index) {
+    if (index < 6) {
+    }
     forecastHTML =
       forecastHTML +
       `
@@ -169,7 +171,7 @@ function displayForecast(response) {
           }@2x.png" alt="" width="42" />
           </li>
           <li>
-            <b>${forecastDay.temp.day} &#8451;</b>
+            <b>${Math.round(forecastDay.temp.day)} &#8451;</b>
           </li>
         </ul>
       </div>
