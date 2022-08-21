@@ -41,11 +41,13 @@ const date = document.querySelector("#date");
 date.innerHTML = `${day}, ${number}/${month},  ${hour}:${minutes}`;
 
 function formatDay(timestamp) {
-  let date = new Data(timestamp * 1000);
-  let day = day.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let date = new Date(timestamp * 1000);
 
-  return day[day];
+  return getDayNameByDate(date);
+}
+
+function getDayNameByDate(date) {
+  return date.toDateString().split(" ")[0];
 }
 
 if (hour <= 18 && hour >= 7) {
@@ -93,7 +95,6 @@ document.addEventListener("DOMContentLoaded", ($event) => {
 });
 
 function showWeather(response) {
-  console.log(response);
   const cityTemp = document.querySelector(".current_degree_val");
   const mainTempVal = response.data.main.temp;
   cityPlace.innerHTML = response.data.name;
@@ -113,20 +114,22 @@ function showWeather(response) {
     response.data.weather[0].description;
 
   showIcon(response.data.weather[0].icon);
+
+  getForecast({
+    lat: response.data.coord.lat,
+    long: response.data.coord.lon,
+  });
 }
 
 function searchCity(event) {
   const input = document.querySelector("#city");
   const city = input.value;
-  // const cityPlace = document.querySelector("#search_city");
   cityPlace.innerHTML = city;
   const url = `${apiDomain}/data/2.5/weather?q=${city}&appid=${api}&units=metric`;
-  console.log(url);
   axios.get(url).then(showWeather);
 }
 
 function showIcon(iconCode) {
-  console.log("Iconcode", iconCode);
   const wheatherIcon = document.getElementById("weatherIcon");
   wheatherIcon.src = `${apiDomain}/img/w/${iconCode}.png`;
   wheatherIcon.hidden = false;
@@ -136,11 +139,15 @@ const inputForm = document.querySelector("form");
 form.addEventListener("submit", searchCity);
 
 function getPosition(response) {
-  console.log(response);
   let lat = response.coords.latitude;
   let long = response.coords.longitude;
   let urlPosition = `${apiDomain}/data/2.5/weather?lat=${lat}&lon=${long}&appid=baa17103f06129d63a6c32b2406b94ba&units=metric`;
   axios.get(urlPosition).then(showWeather);
+
+  getForecast({
+    lat: response.coords.latitude,
+    long: response.coords.longitude,
+  });
 }
 
 function getCurrentLocation(event) {
@@ -151,49 +158,41 @@ const locatorButton = document.querySelector("#locator");
 locatorButton.addEventListener("click", getCurrentLocation);
 
 function displayForecast(response) {
-  let forecast = response.data.daily;
-  let forecastElement = document.querySelector("#forecast");
+  const data = response.data.daily;
+  const forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
 
-  days.forEach(function (forecastDay, index) {
-    if (index < 6) {
-    }
-    forecastHTML =
-      forecastHTML +
-      `
+  data.forEach((day, index) => {
+    const icon = day?.weather[0].icon;
+    const temp = day?.temp.day ?? "-";
+    if (index > 0 && index < 7) {
+      forecastHTML += ` 
       <div class="col-sm">
         <ul>
-          <li>${formatDay(forecastDay.dt)}</li>
+          <li>${formatDay(day.dt)}</li>
           <li class="emoji">
-          <img src="http://openweathermap.org/img/wn/${
-            forecastDay.weather[0].icon
-          }@2x.png" alt="" width="42" />
+          <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="" width="42" />
           </li>
           <li>
-            <b>${Math.round(forecastDay.temp.day)} &#8451;</b>
+            <b>${Math.round(temp)} &#8451;</b>
           </li>
         </ul>
       </div>
      `;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
-displayForecast();
-
 // PROBLEM PART
 
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "baa17103f06129d63a6c32b2406b94ba";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={part}&appid=baa17103f06129d63a6c32b2406b94ba&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.long}&exclude={part}&appid=baa17103f06129d63a6c32b2406b94ba&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
-// PROBLEM PART
-
-getForecast(response.data.coord);
 
 window.addEventListener("load", (event) => {
   navigator.geolocation.getCurrentPosition(getPosition);
